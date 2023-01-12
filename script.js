@@ -14,8 +14,6 @@ searchBtnEl.addEventListener("click", function (event) {
   if (searchEl.value.trim() || searchEl.value.trim() !== "") {
     let city = searchEl.value.trim();
 
-    // need to add something here for typing an error...catch?
-
     saveCitySearch(city);
     weather(searchEl.value)
     searchEl.value = "";
@@ -30,14 +28,7 @@ function weather(localWeather) {
     "&appid=6167587c391046375de6b18f1d876b8a&units=imperial"
   )
 
- // function forecast(FIVEday) {
- //   fetch(
- //     "api.openweathermap.org/data/2.5/forecast?q=" +
- //     FIVEday +
- //     "&appid=bb5efc8e0836199329fca83c56e87685&units=imperial"
- //   )
- // }
-   .then((response) => response.json())
+    .then((response) => response.json())
     .then((data) => {
       console.log(data);
 
@@ -57,10 +48,8 @@ function weather(localWeather) {
       document.querySelector(".name").textcontent = (data.name);
       console.log(data.main.name);
 
-      // 5 day weather print out
-
-      document.querySelector(".dt").textContent = (data.dt);
-      console.log(data.dt);
+      document.querySelector(".dt").textContent = (data.current.dt);
+      console.log(data.current.dt);
 
       // can pull other icons from another source if you want
       var weatherIcon = data.weather[0].icon;
@@ -72,7 +61,6 @@ function weather(localWeather) {
 
     });
 };
-// console.log(searchEl.value);
 
 // Saving the past searches into local storage
 function saveCitySearch(city) {
